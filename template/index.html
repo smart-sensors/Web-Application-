@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+        </script>
+        <script type="text/javascript">
+            var mqtt;
+            var message;
+            function showtcp(){
+                var tcp_addres = document.getElementById("tcp_address").value;
+                document.getElementById("tcp").innerHTML = tcp_addres;
+            };
+            function onConnect(){
+              console.log("connected")
+              document.getElementById("status").innerHTML = "Connected"
+            };
+            function MQTTsubscribe(){
+                var topic = document.getElementById("topic").value;
+                mqtt.subscribe(topic);
+            };
+            function noConnect(){
+              console.log("Conncetion Error")
+              document.getElementById("status").innerHTML = "Connection Error"
+            };
+            function onMessageArrived(msg){
+              document.getElementById("message").innerHTML = msg.payloadString
+            }
+            function MQTTconnect(){
+              document.getElementById("status").innerHTML = "Connecting..."
+              var tcp_addres = document.getElementById("tcp_address").value;
+              var port = document.getElementById("port").value;
+              mqtt = new Paho.MQTT.Client(tcp_addres,8000,"ClientID");
+              var options = {
+                onSuccess:onConnect,
+                onFailure:noConnect
+              };
+              mqtt.onMessageArrived = onMessageArrived;
+              mqtt.connect(options);
+            };
+        </script>
+    </head>
+    <body>
+       Enter TCP Address:
+       <input type = "text" id="tcp_address"><br>
+       Enter Port:
+       <input type = "text" id="port"><br>
+       <p>
+           <button onclick = "MQTTconnect()"> Connect </button><br>
+       </p>
+       Status:
+       <p style = "display:inline" id = "status"></p><br>
+       Enter Topic:
+       <input type = "text" id = "topic">
+       <p>
+         <button onclick= "MQTTsubscribe()"> Subscribe </button>
+       </p>
+       Data:
+       <p style = "display:inline" id = "message"></p>
+    </body>
+</html>
