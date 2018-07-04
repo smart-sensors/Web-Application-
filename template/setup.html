@@ -1,0 +1,149 @@
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+    <script type = "text/javascript">
+    var mqtt;
+    function onConnect(){
+      console.log("Connected");
+      var button_status = sessionStorage.getItem("button_type");
+      console.log(button_status);
+      switch(button_status){
+
+        case "setup":
+          var topic = localStorage.getItem("client_name");
+          var setup = new Paho.MQTT.Message("setup");
+          setup.destinationName = topic;
+          mqtt.send(setup);
+          window.location.href = 'http://128.10.3.51:5000/setup';
+          break;
+
+        case "SavedDevice":
+          var topic = sessionStorage.getItem("client_name");
+          var saved_device = new Paho.MQTT.Message("saved_device");
+          saved_device.destinationName = topic;
+          mqtt.send(saved_device);
+          break;
+
+        case "homepage":
+          var topic = sessionStorage.getItem("client_name");
+          var homepage = new Paho.MQTT.Message("homepage");
+          homepage.destinationName = topic;
+          mqtt.send(homepage);
+          window.location.href = 'http://128.10.3.51:5000/homepage';
+          break;
+
+        case "BLE_connect":
+          var topic = sessionStorage.getItem("client_name");
+          var ble_connect = new Paho.MQTT.Message("ble_connect");
+          ble_connect.destinationName = topic+"/setup";
+          mqtt.send(ble_connect);
+
+          var BLE_Device_name = document.getElementById("BLE_Device_name").value;
+          var BLE_Device_name_message = new Paho.MQTT.Message(BLE_Device_name);
+          BLE_Device_name_message.destinationName = topic + "/setup/DeviceName";
+          mqtt.send(BLE_Device_name_message);
+
+          var Scan_time = document.getElementById("Scan_time").value;
+          var Scan_time_message = new Paho.MQTT.Message(Scan_time);
+          Scan_time_message.destinationName = topic + "/setup/ScanTime";
+          mqtt.send(Scan_time_message);
+
+          break;
+      }
+    }
+    function noConnect(){
+      console.log("Connection Error");
+    }
+    function MQTTconnect(button_type){
+      var tcp_address = sessionStorage.getItem("brokertcp");
+      var port = parseInt(sessionStorage.getItem("port"));
+      var button_status = sessionStorage.setItem("button_type",button_type);
+      mqtt = new Paho.MQTT.Client(tcp_address, port ,"ClientID")
+      var options = {
+        onSuccess:onConnect,
+        onFailure:noConnect
+      };
+      mqtt.connect(options);
+    };
+    MQTTconnect("none");
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      h1 {
+        background-color: Tomato;
+        color: White;
+        font-family: Arial, Helventica, sans-serif;
+        text-align: right;
+      }
+      button.tab{
+        background-color: Tomato;
+        float:left;
+        border:none;
+        outline:none;
+        cursor:pointer;
+        padding: 8.2px 15px;
+        transition: 0.3s;
+        font-size: 18px;
+        font-family: Arial, Helventica, sans-serif;
+        color:white;
+      }
+      button.tab:hover{
+        background-color: crimson;
+      }
+      h2{
+        font-family: Arial, Helventica, sans-serif;
+      }
+      h3.dashboard{
+        font-family: Arial, Helventica, sans-serif;
+      }
+      div.ble_device_input{
+        font-family: Arial, Helventica, sans-serif;
+        color: white;
+        background-color: seagreen;
+        float:left;
+        margin: 5px;
+        padding: 5px 5px;
+        font-size: 18px
+      }
+      button.ble_button{
+        font-family: Arial, Helventica, sans-serif;
+        font-size: 14px;
+        background-color: mediumseagreen;
+        float:left;
+        border:none;
+        outline:none;
+        cursor:pointer;
+        transition: 0.3s;
+        width: 150px;
+        color: white;
+        margin-top: 5px;
+        font-size: 18px;
+      }
+      button.ble_button:hover{
+        background-color: seagreen;
+      }
+    </style>
+    <title>Setup</title>
+  </head>
+  <body>
+    <h1>MQTT Messaging Protocol
+      <button class = "tab" onClick = "MQTTconnect('homepage')">Homepage</button>
+      <button class = "tab" onClick = "MQTTconnect('setup')">Setup</button></a>
+      <button class = "tab" onClick = "MQTTconnect('SavedDevice')">Saved Setting</button>
+    </h1>
+    <h2>
+      BLE Device Status:
+      <div>
+        <h3 class = "dashboard" id = "BLE_Status">Not Connected</h3>
+      </div>
+    </h2><br>
+    <div class = "ble_device_input">
+      BLE Device Name:
+      <input style= "text" id = "BLE_Device_name"><br>
+      Scan Time:
+      <input style = "text" id = "Scan_time"><br>
+      <button class = "ble_button" onClick = "MQTTconnect('BLE_connect')">Connect</button>
+      <button class ="ble_button">Disconnect</button>
+    </div>
+  </body>
+</html>
