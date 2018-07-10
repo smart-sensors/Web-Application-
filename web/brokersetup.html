@@ -1,0 +1,50 @@
+<html>
+  <title>Broker Setup</title>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+    <script type = "text/javascript" src="try_connect.js"></script>
+    <style>
+      h1.title{
+        background-color: Tomato;
+        color: White;
+        font-family: Arial, Helventica, sans-serif;
+        text-align: center;
+      }
+      h2.status{
+        font-family: Arial, Helventica, sans-serif;
+      }
+      div.input{
+        font-family: Arial, Helventica, sans-serif;
+        background-color: Indigo
+        color: White;
+      }
+      button.connect{
+        background-color: green;
+        color:white;
+      }
+      button.next{
+        background-color: Darkslateblue;
+        color:white;
+      }
+    </style>
+    <body>
+      <h1 class = "title">MQTT Messaging Protocol</h1>
+      <h2 class = "status">
+        Broker Status:
+        <h2 class = "status" id = "status">Device Not Connected</h2>
+      </h2><br>
+      <div class = "input">
+        Enter TCP address:
+        <input type = "text" id = "tcp_address"><br>
+        Enter Port:
+        <input type = "text" id = "port"><br>
+        Enter Username:
+        <input type = "text" id = "username"><br>
+        Enter password:
+        <input type = "password" id = "password"><br>
+        <button class = "connect" onclick= "MQTTconnect()">Connect</button>
+        <a href= "http://128.10.3.51:5000/homepage"><button class = "next">Next</button></a>
+      </div>
+    </body>
+  </head>
+</html>
