@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <link rel="stylesheet" href='/static/css/style_index.css'/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+    <script type = "text/javascript" src='/static/js/mqtt_client.js'></script>
+    <title>MQTT</title>
+  </head>
+  <body>
+    <h1>MQTT Messaging Protocol
+      <button class = "tab">Homepage</button>
+      <button class = "tab" onClick = "MQTTconnect('setup')">Setup</button>
+      <button class = "tab" onClick = "MQTTconnect('SavedDevice')">Saved Setting</button>
+    </h1>
+    <div class = "ble_name"></div>
+    <div class = "message">
+      <h2 class = "message_title">Received Message:</h2>
+      <p class = "message"></p>
+    </div>
+    <div class = "topic">
+      <div class = "topic_label">
+        Enter Topic:<br>
+        <input class = "topic"><br>
+        Enter Client Name:
+        <input class = "topic" id = "client_name">
+        <button class = "client" onClick = "MQTTconnect('client_name_connect')">Connect</button><br>
+      </div>
+    </div>
+    <div class = "button_group">
+      <button class = "button_left">Subscribe</button>
+      <button class = "button_right">Unsubscribe</button>
+    </div>
+  </body>
+</html>
