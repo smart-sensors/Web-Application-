@@ -9,16 +9,13 @@
  * 4. When a device needs to use the function, call apply() with the fixed parameter list
  * 5. LUT returns a partially-applied function corresponding to a specific device configuration
  */
-LUT.prototype.push = function(label, f) {
-  self.lut[label] = f;
-}
 
 class LUT {
   constructor(preload) {
     self.lut = [];
-    if(preload !== undefined) {
+    if(preload) {
       for(let i in preload) {
-        self.push(preload[i]);
+        self.add(preload[i]);
       }
     }
   }
@@ -31,8 +28,13 @@ class LUT {
   }
 }
 
+LUT.prototype.add = function(label, f) {
+  self.lut[label] = f;
+}
+
+
 // TEST CODE
-let lut = new LUT({
+/*let lut = new LUT({
   "temp":temp_sensor
 });
 
@@ -47,3 +49,4 @@ function temp_sensor(limits, data) { // Dummy data, assumes 0-5V scale, 100 F ma
 
 
 function voltmeter(dummy, data) { return data / 1000; }
+*/
