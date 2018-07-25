@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <link rel="stylesheet" href='/static/css/style_saved_setting.css'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+    <script type = "text/javascript" src='/static/js/saved_setting.js'></script>
+    <title>MQTT</title>
+  </head>
+  <body>
+    <h1>MQTT Messaging Protocol
+      <button class = "tab" onClick = "MQTTconnect('homepage')">Homepage</button>
+      <button class = "tab" onClick = "MQTTconnect('setup')">Setup</button>
+      <button class = "tab" onClick = "MQTTconnect('SavedDevice')">Saved Setting</button>
+    </h1>
+    <h2 class = "title">
+      Saved BLE Devices
+    </h2>
+    <div class = "tab" id = "tab"></div>
+    <div class = "content" id = "content"></div>
+  </body>
+</html>

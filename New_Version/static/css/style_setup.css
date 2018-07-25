@@ -1,0 +1,53 @@
+h1 {
+  background-color: Tomato;
+  color: White;
+  font-family: Arial, Helventica, sans-serif;
+  text-align: right;
+}
+button.tab{
+  background-color: Tomato;
+  float:left;
+  border:none;
+  outline:none;
+  cursor:pointer;
+  padding: 8.2px 15px;
+  transition: 0.3s;
+  font-size: 18px;
+  font-family: Arial, Helventica, sans-serif;
+  color:white;
+}
+button.tab:hover{
+  background-color: crimson;
+}
+h2{
+  font-family: Arial, Helventica, sans-serif;
+}
+h3.dashboard{
+  font-family: Arial, Helventica, sans-serif;
+}
+div.ble_device_input{
+  font-family: Arial, Helventica, sans-serif;
+  color: white;
+  background-color: seagreen;
+  float:left;
+  margin: 5px;
+  padding: 5px 5px;
+  font-size: 18px
+}
+button.ble_button{
+  font-family: Arial, Helventica, sans-serif;
+  font-size: 14px;
+  background-color: mediumseagreen;
+  float:left;
+  border:none;
+  outline:none;
+  cursor:pointer;
+  transition: 0.3s;
+  width: 150px;
+  color: white;
+  margin-top: 5px;
+  font-size: 18px;
+}
+button.ble_button:hover{
+  background-color: seagreen;
+}
