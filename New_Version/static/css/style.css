@@ -1,0 +1,29 @@
+h1.title{
+  background-color: Tomato;
+  color: White;
+  font-family: Arial, Helventica, sans-serif;
+  text-align: center;
+}
+h2.status{
+  font-family: Arial, Helventica, sans-serif;
+}
+div.input{
+  font-family: Arial, Helventica, sans-serif;
+  background-color: Indigo
+  color: White;
+}
+button.connect{
+  background-color: green;
+  color:white;
+  float:left;
+  border:none;
+  outline:none;
+  cursor:pointer;
+  padding: 4px 15px;
+  transition: 0.3s;
+  font-size: 18px;
+  margin-top: 15px;
+}
+button.connect:hover{
+  background-color: darkolivegreen;
+}

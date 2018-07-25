@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Setup</title>
+    <link rel="stylesheet" href='/static/css/style_setup.css'/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+    <script type = "text/javascript" src='/static/js/ble_setup.js'></script>
+  </head>
+  <body>
+    <h1>MQTT Messaging Protocol
+      <button class = "tab" onClick = "MQTTconnect('homepage')">Homepage</button>
+      <button class = "tab" onClick = "MQTTconnect('setup')">Setup</button></a>
+      <button class = "tab" onClick = "MQTTconnect('SavedDevice')">Saved Setting</button>
+    </h1>
+    <h2>
+      BLE Device Status:
+      <div>
+        <h3 class = "dashboard" id = "BLE_Status">Not Connected</h3>
+      </div>
+    </h2><br>
+    <div class = "ble_device_input">
+      BLE Device Name:
+      <input style= "text" id = "BLE_Device_name"><br>
+      <button class = "ble_button" onClick = "MQTTconnect('BLE_connect')">Connect</button>
+      <button class ="ble_button" onClick = "MQTTconnect('BLE_Disconnect')">Disconnect</button>
+    </div>
+  </body>
+</html>
