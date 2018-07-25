@@ -8,12 +8,16 @@ class Sensor {
   }
 
   process() {
-    return this.formatter(this.data);
+    return this.data;
+    //return this.formatter(this.data[0]);
   }
 
-  update() {
-    for (topic in this.topics) {
-      this.data.push(/*MQTT READ OF TOPIC LINE*/);
+  update(payload) {
+    if(payload !== undefined) {
+      this.data.push(payload.payloadString);
     }
+    /*for (topic in this.topics) {
+      this.data.push(message);
+    }*/
   }
 }

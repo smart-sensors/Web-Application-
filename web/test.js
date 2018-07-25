@@ -1,21 +1,22 @@
-/* NOTES:
-    - MQTT -> try to read a topic
-    - If topic has data, construct a sensor.
-    - Give a formatter for the sensor -- simple lookup table?
-*/
+let lut = new LUT(false); // CHANGE THIS TO LOOK FOR COOKIES
+lut.add(
+  "vmm",
+  (x, y) => y * 1000
+);
+let sensor = new Sensor("test", "vmm", "test", lut.apply("vmm", [])); // Creates new sensor formatted as a VMM
 
+mqtt.onMessageArrived = sensor.update;
+mqtt.connect();
 
+/*while true {
+  console.log(sensor.process());
+}*/
+  //delay();
 
-function a() {
-
-}
-
-function b() {
-
-}
-
-function sensor_read(s) {
-  for(let i = 0; i < data.length; i++) {
-    s.data.push(data[i]);
+function delay(ms) {
+  start = new Date().getTime();
+  end = start;
+  while(end < start + ms) {
+    end = new Date().getTime();
   }
 }
